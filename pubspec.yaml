@@ -1,9 +1,12 @@
 name: datetimepicker
-version: 0.1.0
+version: 0.2.0
 author: Johan Henselmans<johanhenselmans@gmail.com>
 description: DateTime Input using a DateTime Picker Based on https://github.com/jrofurtado/datepicker.git
-homepage: https://github.com/johanhenselmans/datetimepicker
+homepage: https://github.com/johanhenselmans/datetimepickerpolymer
 dependencies:
   browser: any
   intl: any
-  web_ui: any
+  polymer: any
+transformers:
+- polymer:
+    entry_points: web/index.html

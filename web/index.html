@@ -2,21 +2,29 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Date Picker</title>
-    <link rel="import" href="packages/datetimepicker/components/xdatetimeinput.html">
+    <title>Date Time Picker Form</title>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="import" href="packages/polymer/polymer.html">
+    <!-- import the date_time_input -->
+    <link rel="import" href="date_time_input.html">
+    <script type="application/dart">export 'package:polymer/init.dart';</script>
+    <script src="packages/browser/dart.js"></script>
+    
   </head>
   <body>
+  
     <label for="datetime1">DateTime1</label>
-    <xdatetimeinput id="xdatetime1" inputid="datetime1" value="{{datetime1}}"></xdatetimeinput>
+    <div id="datetime1">
+      <date-time-input dateTimeId="dateTime1" dateTimeString="1999-01-01 10:00"></date-time-input>
+    </div>
     <label for="datetime2">DateTime2</label>
-    <xdatetimeinput id="xdatetime2" inputid="datetime2" value="{{datetime2}}"></xdatetimeinput>
-    <br>
-    <label for="datetime3">DateTime3</label>
-    <xdatetimeinput id="xdatetime3" inputid="datetime3" value="{{datetime3}}"></xdatetimeinput>
-    <label for="datetime4">DateTime4</label>
-    <xdatetimeinput id="xdatetime4" inputid="datetime4" value="{{datetime4}}"></xdatetimeinput>
-
-    <script type="application/dart" src="index.dart"></script>
-    <script src="packages/browser/dart.js"></script>
+    <div id="datetime2">
+      <date-time-input dateTimeId="dateTime2" dateTimeString="2013-01-01 10:00"></date-time-input>
+    </div>
+    <div id="datetime3">
+      <date-time-input dateTimeId="dateTime3" dateTimeString=""></date-time-input>
+    </div>
+    
   </body>
 </html>
