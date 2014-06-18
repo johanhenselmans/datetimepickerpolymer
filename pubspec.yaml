@@ -1,4 +1,4 @@
-name: datetimepicker
+name: date_time_input
 version: 0.2.0
 author: Johan Henselmans<johanhenselmans@gmail.com>
 description: DateTime Input using a DateTime Picker Based on https://github.com/jrofurtado/datepicker.git
