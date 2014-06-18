@@ -1,0 +1,131 @@
+<polymer-element name="date-time-input" attributes="dateTimeString dateTimeId">
+<template>
+<style>
+    display: block;
+   
+    .datetimeinput_parent {
+      display: block;
+      position: relative;
+    }
+    
+    .datetimeinput_datePicker {
+      position: absolute;
+      margin-top: 10px;
+      position: absolute;
+      padding: 5px 5px 5px 5px;
+      z-index: 999;
+      border: 1px solid;
+      background-color: #fff;
+    }
+    
+    .datetimeinput_selected {
+      font-weight: bold;
+      border: 1px solid;
+    }
+    
+    .datetimeinput_selectable:hover {
+      cursor: pointer;
+    }
+    
+    .datetimeinput_minute {
+      text-align: center;
+    }
+    
+    .datetimeinput_hour {
+      text-align: center;
+    }
+    
+    .datetimeinput_day {
+      text-align: center;
+    }
+    
+    .datetimeinput_weekday {
+      text-align: center;
+    }
+    
+    .datetimeinput_yearMonth {
+      text-align: center;
+      white-space: nowrap;
+    }
+    
+    .datetimeinput_close {
+      text-align: right;
+    }
+    
+    .datetimeinput_button {
+      display: inline;
+    }
+    
+    .datetimeinput_button:hover {
+      cursor: pointer;
+    }
+    
+    .datetimeinput_closing {
+      opacity: 0;
+      transition-property: opacity;
+      transition-duration: 0.5s;
+    }
+</style>
+<span class="datetimeinput_parent">
+<!-- <template if="{{ showDiv && started }}"> -->  
+<template if={{showDiv}}>
+  <div class="datetimeinput_datePicker {{ closing?'datetimeinput_closing':'' }}">
+    <div class="datetimeinput_dateYearMonth">
+      <button class="datetimeinput_button" on-click="{{ previousDay }}">&larr;</button>
+      {{currentdate.day}}
+      <button class="datetimeinput_button" on-click="{{ nextDay }}">&rarr;</button>
+      <button class="datetimeinput_button" on-click="{{ previousMonth }}">&larr;</button>
+      {{currentdate.month}}
+      <button class="datetimeinput_button" on-click="{{ nextMonth }}">&rarr;</button>
+      <button class="datetimeinput_button" on-click="{{ previousYear }}">&larr;</button>
+      {{currentdate.year}}
+      <button class="datetimeinput_button" on-click="{{ nextYear }}">&rarr;</button>
+    </div>
+    <div>
+      <table>
+        <thead>
+        <tr>
+        <template repeat="{{ weekday in weekdayTexts }}">
+            <th class="datetimeinput_weekday">{{weekday}}</th>
+            </template>
+          </tr>
+        </thead>
+        <tbody>
+        <template repeat="{{ weekList in calendarList }}">
+        <tr>
+          <template repeat="{{ day in weekList }}">
+          <td>
+            <div class="datetimeinput_day">
+            <template if="{{ day!=null }}">
+<!--              <div class="datetimeinput_selectable {{ isToday(day) ? 'datetimeinput_selected' : '' }}" on-click="{{ chooseDay }}"> {{day}} </div> -->
+<!--              <div class="datetimeinput_selectable {{ datetimeinput_selected: isToday(day) }}" on-click="{{ chooseDay }}"> {{day}} </div> -->
+              <template if="{{ isToday(day) }}">
+              <div class="datetimeinput_selectable datetimeinput_selected" on-click="{{ chooseDay }}"> {{day}} </div>
+              </template>
+              <template if="{{ !isToday(day) }}">
+              <div class="datetimeinput_selectable " on-click="{{ chooseDay(day) }}">{{day}}</div> 
+              </template>
+              </template>
+              </div>
+          </td>
+          </template>
+          </tr>
+          </template>
+        </tbody>
+      </table>
+    </div>
+    <div class="datetimeinput_hourMinute">
+      <button class="datetimeinput_button" on-click="{{ previousHour }}">&larr;</button>
+      {{currentdate.hour}}
+      <button class="datetimeinput_button" on-click="{{ nextHour }}">&rarr;</button>
+      <button class="datetimeinput_button" on-click="{{ previousMinute }}">&larr;</button>
+      {{currentdate.minute}}
+      <button class="datetimeinput_button" on-click="{{ nextMinute }}">&rarr;</button>
+    </div>
+  </div>
+  </template>
+</span>
+<input id="{{dateTimeId}}" type="text" on-focus="{{ show }}" on-blur="{{ close }}" value="{{ dateTimeString }}" on-change="{{ onValueChange }}" placeholder="{{ inputplaceholder }}" maxlength="{{ inputmaxlength }}">
+</template>
+<script type="application/dart" src="date_time_input.dart"></script> 
+</polymer-element>

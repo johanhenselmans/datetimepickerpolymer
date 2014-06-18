@@ -1,7 +1,8 @@
-import 'dart:io';
-import 'package:web_ui/component_build.dart';
+import 'package:polymer/builder.dart';
+        
+main(args) {     
+  build(entryPoints: ['web/index.html'],
+      options: parseOptions(args));
 
-// Ref: http://www.dartlang.org/articles/dart-web-components/tools.html
-main() {
-  build(new Options().arguments, ['web/index.html']);
 }
+
