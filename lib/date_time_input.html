@@ -1,76 +1,83 @@
 <polymer-element name="date-time-input" attributes="dateTimeString dateTimeId">
 <template>
 <style>
- :host{   
-    .datetimeinput_parent {
-      display:  block;
-      position: relative;
-    }
-    
-    .datetimeinput_datePicker {
-      position: absolute;
-      margin-top: 10px;
-      position: absolute;
-      padding: 5px 5px 5px 5px;
-      z-index: 999;
-      border: 1px solid;
-      background-color: #fff;
-    }
-    
-    .datetimeinput_selected {
-      font-weight: bold;
-      border: 1px solid;
-    }
-    
-    .datetimeinput_selectable:hover {
-      cursor: pointer;
-    }
-    
-    .datetimeinput_minute {
-      text-align: center;
-    }
-    
-    .datetimeinput_hour {
-      text-align: center;
-    }
-    
-    .datetimeinput_day {
-      text-align: center;
-    }
-    
-    .datetimeinput_weekday {
-      text-align: center;
-    }
-    
-    .datetimeinput_yearMonth {
-      text-align: center;
-      white-space: nowrap;
-    }
-    
-    .datetimeinput_close {
-      text-align: right;
-    }
-    
-    .datetimeinput_button {
-      display: inline;
-    }
-    
-    .datetimeinput_button:hover {
-      cursor: pointer;
-    }
-    
-    .datetimeinput_closing {
-      opacity: 0;
-      transition-property: opacity;
-      transition-duration: 0.5s;
-    }
- }
+:host {
+  display: block;
+}
+
+:host(.datetimeinput_parent) {
+  display: block;
+  position: relative;
+}
+
+:host(.datetimeinput_datepicker) {
+  display: block;
+  position: absolute;
+  margin-top: 10px;
+  position: absolute;
+  padding: 5px 5px 5px 5px;
+  z-index: 999;
+  border: solid 1px;
+  background-color: #fff;
+}
+
+:host(.datetimeinput_selected) {
+  font-weight: bold;
+  border: 1px solid;
+}
+
+:host(.datetimeinput_selectable:hover) {
+  cursor: pointer;
+}
+
+:host(.datetimeinput_minute) {
+  text-align: center;
+}
+
+:host(.datetimeinput_hour) {
+  text-align: center;
+}
+
+:host(.datetimeinput_hourminute) {
+  text-align: center;
+}
+
+:host(.datetimeinput_day) {
+  text-align: center;
+}
+
+:host(.datetimeinput_weekday) {
+  text-align: center;
+}
+
+:host(.datetimeinput_yearmonth) {
+  text-align: center;
+  white-space: nowrap;
+}
+
+:host(.datetimeinput_close) {
+  text-align: right;
+}
+
+:host (.datetimeinput_button) {
+  display: inline;
+}
+
+:host(.datetimeinput_button:hover) {
+  cursor: pointer;
+}
+
+:host(.datetimeinput_closing) {
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 0.5s;
+}
 </style>
 <span class="datetimeinput_parent">
 <!-- <template if="{{ showDiv && started }}"> -->  
 <template if={{showDiv}}>
-  <div class="datetimeinput_datePicker {{ closing?'datetimeinput_closing':'' }}">
-    <div class="datetimeinput_dateYearMonth">
+  <div class="datetimeinput_datepicker {{ closing?'datetimeinput_closing':'' }}">
+    <div class="datetimeinput_yearmonth">
       <button class="datetimeinput_button" on-click="{{ previousDay }}">&larr;</button>
       {{currentdate.day}}
       <button class="datetimeinput_button" on-click="{{ nextDay }}">&rarr;</button>
@@ -106,7 +113,7 @@
         </tbody>
       </table>
     </div>
-    <div class="datetimeinput_hourMinute">
+    <div class="datetimeinput_hourminute">
       <button class="datetimeinput_button" on-click="{{ previousHour }}">&larr;</button>
       {{currentdate.hour}}
       <button class="datetimeinput_button" on-click="{{ nextHour }}">&rarr;</button>
