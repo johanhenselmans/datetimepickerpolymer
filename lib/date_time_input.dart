@@ -45,13 +45,6 @@ class DateTimeInput extends PolymerElement  {
   DateTimeInput.created(): super.created() {
     if(!initializing){
       initializing = true;
-      findSystemLocale().then((_){
-        initializeDateFormatting(Intl.systemLocale, null).then((_){
-          _initializeTexts(new DateFormat.E().dateSymbols);
-          newCalendarList;
-          initialized = true;
-        });
-      });
     }
   }
 
@@ -60,7 +53,15 @@ class DateTimeInput extends PolymerElement  {
     if(dateTimeString == null || dateTimeString.isEmpty || dateTimeString.length == 0){
       currentdate = new DateTime.now();
       dateTimeString=currentdate.toString().substring(0,16);
+
     }
+    findSystemLocale().then((_){
+      initializeDateFormatting(Intl.systemLocale, null).then((_){
+        _initializeTexts(new DateFormat.E().dateSymbols);
+        newCalendarList;
+        initialized = true;
+      });
+    });
   }
 
 
@@ -160,8 +161,9 @@ class DateTimeInput extends PolymerElement  {
   }
 
   void chooseDay(Event e, var detail, Node target){
-    String nodeval = target.text;
-    print("event $e, detail $detail, node: $nodeval");
+    String nodetext = target.text;
+    String nodeString = target.toString();
+    print("event $e, detail $detail, nodetext: [$nodetext], nodestring $nodeString");
     int day = int.parse(target.text);
     //target.nodeValue
     print("run ChooseDay, day is $day");
@@ -269,7 +271,7 @@ class DateTimeInput extends PolymerElement  {
       weekdayTexts.add(ds.STANDALONESHORTWEEKDAYS[k]);
     }
     monthTexts = ds.STANDALONESHORTMONTHS;
-//    print("weekdayText and monthText is $weekdayTexts and $monthTexts");
+    print("weekdayText and monthText is $weekdayTexts and $monthTexts");
   }
 
 

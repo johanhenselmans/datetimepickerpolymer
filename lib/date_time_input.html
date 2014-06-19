@@ -1,16 +1,21 @@
 <polymer-element name="date-time-input" attributes="dateTimeString dateTimeId">
+<!-- for a discussion about :host syntax, see:
+ https://groups.google.com/a/dartlang.org/forum/#!searchin/web/$3Ahost|sort:date/web/tsVnQ8zEOjc/Cu23Zewg8T0J
+ and http://www.polymer-project.org/articles/styling-elements.html
+ --> 
 <template>
 <style>
+
 :host {
   display: block;
 }
 
-:host(.datetimeinput_parent) {
+:host(.datetimeinput_parent), :host.datetimeinput_parent, .datetimeinput_parent {
   display: block;
   position: relative;
 }
 
-:host(.datetimeinput_datepicker) {
+:host(.datetimeinput_datepicker), :host.datetimeinput_datepicker, .datetimeinput_datepicker {
   display: block;
   position: absolute;
   margin-top: 10px;
@@ -21,53 +26,53 @@
   background-color: #fff;
 }
 
-:host(.datetimeinput_selected) {
+:host(.datetimeinput_selected), :host.datetimeinput_selected, .datetimeinput_selected {
   font-weight: bold;
   border: 1px solid;
 }
 
-:host(.datetimeinput_selectable:hover) {
+:host(.datetimeinput_selectable:hover), :host.datetimeinput_selectable:hover, .datetimeinput_selectable:hover {
   cursor: pointer;
 }
 
-:host(.datetimeinput_minute) {
+:host(.datetimeinput_minute), :host.datetimeinput_minute,.datetimeinput_minute {
   text-align: center;
 }
 
-:host(.datetimeinput_hour) {
+:host(.datetimeinput_hour), :host.datetimeinput_hour, .datetimeinput_hour {
   text-align: center;
 }
 
-:host(.datetimeinput_hourminute) {
+:host(.datetimeinput_hourminute), :host.datetimeinput_hourminute, .datetimeinput_hourminute {
   text-align: center;
 }
 
-:host(.datetimeinput_day) {
+:host(.datetimeinput_day), :host.datetimeinput_day, .datetimeinput_day {
   text-align: center;
 }
 
-:host(.datetimeinput_weekday) {
+:host(.datetimeinput_weekday), :host.datetimeinput_weekday, .datetimeinput_weekday {
   text-align: center;
 }
 
-:host(.datetimeinput_yearmonth) {
+:host(.datetimeinput_yearmonth),:host.datetimeinput_yearmonth, .datetimeinput_yearmonth {
   text-align: center;
   white-space: nowrap;
 }
 
-:host(.datetimeinput_close) {
+:host(.datetimeinput_close), :host.datetimeinput_close, .datetimeinput_close {
   text-align: right;
 }
 
-:host (.datetimeinput_button) {
+:host(.datetimeinput_button), :host.datetimeinput_button, .datetimeinput_button {
   display: inline;
 }
 
-:host(.datetimeinput_button:hover) {
+:host(.datetimeinput_button:hover), :host.datetimeinput_button:hover, .datetimeinput_button:hover {
   cursor: pointer;
 }
 
-:host(.datetimeinput_closing) {
+:host(.datetimeinput_closing), :host.datetimeinput_closing, .datetimeinput_closing {
   opacity: 0;
   transition-property: opacity;
   transition-duration: 0.5s;
@@ -101,10 +106,10 @@
             <div class="datetimeinput_day">
             <template if="{{ day!=null }}">
               <template if="{{ isToday(day) }}">
-              <div id={{day}} class="datetimeinput_selectable datetimeinput_selected" on-click="{{chooseDay}}" value="{{day}}">{{day}}</div>
+              <div id="day{{day}}" class="datetimeinput_selectable datetimeinput_selected" on-click="{{chooseDay}}">{{day}}</div>
               </template>
               <template if="{{ !isToday(day) }}">
-              <div id={{day}} class="datetimeinput_selectable" on-click="{{chooseDay}}" value="{{day}}">{{day}}</div> 
+              <div id="day{{day}}" class="datetimeinput_selectable" on-click="{{chooseDay}}">{{day}}</div> 
               </template>
               </template>
               </div>
