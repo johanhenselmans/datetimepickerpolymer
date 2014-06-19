@@ -1,10 +1,9 @@
 <polymer-element name="date-time-input" attributes="dateTimeString dateTimeId">
 <template>
 <style>
-    display: block;
-   
+ :host{   
     .datetimeinput_parent {
-      display: block;
+      display:  block;
       position: relative;
     }
     
@@ -65,6 +64,7 @@
       transition-property: opacity;
       transition-duration: 0.5s;
     }
+ }
 </style>
 <span class="datetimeinput_parent">
 <!-- <template if="{{ showDiv && started }}"> -->  
@@ -85,32 +85,24 @@
       <table>
         <thead>
         <tr>
-        <template repeat="{{ weekday in weekdayTexts }}">
-            <th class="datetimeinput_weekday">{{weekday}}</th>
-            </template>
+            <th class="datetimeinput_weekday" template repeat="{{ weekday in weekdayTexts }}">{{weekday}}</th>
           </tr>
         </thead>
         <tbody>
-        <template repeat="{{ weekList in calendarList }}">
-        <tr>
-          <template repeat="{{ day in weekList }}">
-          <td>
+        <tr template repeat="{{ weekList in calendarList }}">
+          <td template repeat="{{ day in weekList }}">
             <div class="datetimeinput_day">
             <template if="{{ day!=null }}">
-<!--              <div class="datetimeinput_selectable {{ isToday(day) ? 'datetimeinput_selected' : '' }}" on-click="{{ chooseDay }}"> {{day}} </div> -->
-<!--              <div class="datetimeinput_selectable {{ datetimeinput_selected: isToday(day) }}" on-click="{{ chooseDay }}"> {{day}} </div> -->
               <template if="{{ isToday(day) }}">
-              <div class="datetimeinput_selectable datetimeinput_selected" on-click="{{ chooseDay }}"> {{day}} </div>
+              <div id={{day}} class="datetimeinput_selectable datetimeinput_selected" on-click="{{chooseDay}}" value="{{day}}">{{day}}</div>
               </template>
               <template if="{{ !isToday(day) }}">
-              <div class="datetimeinput_selectable " on-click="{{ chooseDay(day) }}">{{day}}</div> 
+              <div id={{day}} class="datetimeinput_selectable" on-click="{{chooseDay}}" value="{{day}}">{{day}}</div> 
               </template>
               </template>
               </div>
           </td>
-          </template>
           </tr>
-          </template>
         </tbody>
       </table>
     </div>

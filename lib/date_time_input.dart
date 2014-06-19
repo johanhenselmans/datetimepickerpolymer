@@ -11,7 +11,6 @@ import 'dart:async';
 
 @CustomTag('date-time-input')
 class DateTimeInput extends PolymerElement  {
-  bool get applyAuthorStyles => true; // …
   static bool initializing = false;
   int firstDayOfWeek=6;
   DateTime today = new DateTime.now();
@@ -33,7 +32,7 @@ class DateTimeInput extends PolymerElement  {
   @observable int inputmaxlength=9999;
   String _internalDateTime;
   // displayed as the default string
-  //@observable int day;
+  @observable int day;
 //  @published String get dateTimeString =>_internalDateTime ;
   @observable DateTime currentdate = new DateTime.now();
   //@observable String datetime;
@@ -160,11 +159,17 @@ class DateTimeInput extends PolymerElement  {
     });
   }
 
-  void chooseDay(int day){
-    print("run ChooseDay");
+  void chooseDay(Event e, var detail, Node target){
+    String nodeval = target.text;
+    print("event $e, detail $detail, node: $nodeval");
+    int day = int.parse(target.text);
+    //target.nodeValue
+    print("run ChooseDay, day is $day");
     closing=false;
-    currentdate=new DateTime(currentdate.year, currentdate.month, day, currentdate.hour, currentdate.minute);
-    dateTimeString=currentdate.toString().substring(0,16);
+    if(day != null){
+      currentdate=new DateTime(currentdate.year, currentdate.month, day, currentdate.hour, currentdate.minute);
+      dateTimeString=currentdate.toString().substring(0,16);
+    }
     $[dateTimeId].focus();
 
   }
@@ -252,10 +257,10 @@ class DateTimeInput extends PolymerElement  {
   }
 
   void _initializeTexts(DateSymbols ds){
-    print("into initializeTexts");
-    print(ds.FIRSTDAYOFWEEK);
+//    print("into initializeTexts");
+//    print(ds.FIRSTDAYOFWEEK);
     firstDayOfWeek = ds.FIRSTDAYOFWEEK;
-    print("firstDayOfweek is $firstDayOfWeek");
+//    print("firstDayOfweek is $firstDayOfWeek");
     weekdayTexts = [];
     for(int i=0; i<7; i++){
       int k = firstDayOfWeek+i;
@@ -264,7 +269,7 @@ class DateTimeInput extends PolymerElement  {
       weekdayTexts.add(ds.STANDALONESHORTWEEKDAYS[k]);
     }
     monthTexts = ds.STANDALONESHORTMONTHS;
-    print("weekdayText and monthText is $weekdayTexts and $monthTexts");
+//    print("weekdayText and monthText is $weekdayTexts and $monthTexts");
   }
 
 
