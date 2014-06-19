@@ -163,10 +163,10 @@ class DateTimeInput extends PolymerElement  {
   void chooseDay(Event e, var detail, Node target){
     String nodetext = target.text;
     String nodeString = target.toString();
-    print("event $e, detail $detail, nodetext: [$nodetext], nodestring $nodeString");
+    // print("event $e, detail $detail, nodetext: [$nodetext], nodestring $nodeString");
     int day = int.parse(target.text);
     //target.nodeValue
-    print("run ChooseDay, day is $day");
+    // print("run ChooseDay, day is $day");
     closing=false;
     if(day != null){
       currentdate=new DateTime(currentdate.year, currentdate.month, day, currentdate.hour, currentdate.minute);
@@ -271,7 +271,7 @@ class DateTimeInput extends PolymerElement  {
       weekdayTexts.add(ds.STANDALONESHORTWEEKDAYS[k]);
     }
     monthTexts = ds.STANDALONESHORTMONTHS;
-    print("weekdayText and monthText is $weekdayTexts and $monthTexts");
+  //  print("weekdayText and monthText is $weekdayTexts and $monthTexts");
   }
 
 
