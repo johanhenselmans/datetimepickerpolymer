@@ -5,12 +5,13 @@ import 'package:intl/intl_browser.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbols.dart';
 import 'package:polymer/polymer.dart';
+import 'dart:html' show InputElement;
 import 'dart:html';
 import 'dart:async';
 
 
 @CustomTag('date-time-input')
-class DateTimeInput extends PolymerElement  {
+class DateTimeInput extends InputElement with Polymer, Observable  {
   static bool initializing = false;
   int firstDayOfWeek=6;
   DateTime today = new DateTime.now();
@@ -18,6 +19,7 @@ class DateTimeInput extends PolymerElement  {
 
   @published String dateTimeString;
   @published String dateTimeId;
+  //@published String onValueChange;
 
   Timer timer;
   @observable List<String> monthTexts;
@@ -43,6 +45,7 @@ class DateTimeInput extends PolymerElement  {
 //  void set dateTimeString(String n) { _internalDateTime = n; }
 
   DateTimeInput.created(): super.created() {
+    polymerCreated();
     if(!initializing){
       initializing = true;
     }

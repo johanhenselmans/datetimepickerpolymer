@@ -1,5 +1,4 @@
-<link rel="import" href="../../packages/polymer/polymer.html">
-<polymer-element name="date-time-input" attributes="dateTimeString dateTimeId">
+<polymer-element name="date-time-input" extends="input" attributes="dateTimeString dateTimeId">
 <!-- for a discussion about :host syntax, see:
  https://groups.google.com/a/dartlang.org/forum/#!searchin/web/$3Ahost|sort:date/web/tsVnQ8zEOjc/Cu23Zewg8T0J
  and http://www.polymer-project.org/articles/styling-elements.html
@@ -79,6 +78,7 @@
   transition-duration: 0.5s;
 }
 </style>
+<content>
 <span class="datetimeinput_parent">
 <!-- <template if="{{ showDiv && started }}"> -->  
 <template if={{showDiv}}>
@@ -131,6 +131,7 @@
   </template>
 </span>
 <input id="{{dateTimeId}}" type="text" on-focus="{{ show }}" on-blur="{{ close }}" value="{{ dateTimeString }}" on-change="{{ onValueChange }}" placeholder="{{ inputplaceholder }}" maxlength="{{ inputmaxlength }}">
+</content>
 </template>
 <script type="application/dart" src="date_time_input.dart"></script> 
 </polymer-element>
