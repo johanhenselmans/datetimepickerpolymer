@@ -15,10 +15,13 @@ class DateTimeInput extends InputElement with Polymer, Observable  {
   static bool initializing = false;
   int firstDayOfWeek=6;
   DateTime today = new DateTime.now();
+  //change for polymer 11 if you want stuff in CSS to happen
+  @PublishedProperty(reflect: true) String dateTimeString;
+  //@published String dateTimeString;
+  @PublishedProperty(reflect: true) String dateTimeId;
+  //@published String dateTimeId;
+  @PublishedProperty(reflect: true) num minuteInterval;
 
-
-  @published String dateTimeString;
-  @published String dateTimeId;
   //@published String onValueChange;
 
   Timer timer;
@@ -246,13 +249,51 @@ class DateTimeInput extends InputElement with Polymer, Observable  {
 
   void previousMinute(Event e, var detail, Node target){
     closing=false;
-    currentdate = new DateTime(currentdate.year, currentdate.month, currentdate.day, currentdate.hour,currentdate.minute-1,1);
+    if(minuteInterval != 0 && minuteInterval !=null){
+      // make sure that the next interval is on the hour minuteinterval, eg:
+      // 10 minute interval will lead to 0, 10, 20, 30, 40 etc.
+      // previous one will be the one that is closest to the current value if it
+      // has not been on a 'good' value (eg 0,10,20,30,40,50). So 04 will become 0.
+      // this will do strange things when the divisor will not multiply to 60
+      num realminute = currentdate.minute;
+      num partsminute = (currentdate.minute/minuteInterval).floor();
+      num remainderminute = currentdate.minute%minuteInterval;
+      // print("rminute= ${remainderminute} parts = ${partsminute}");
+      if (remainderminute != 0){
+          partsminute = partsminute+1;
+      }
+      realminute = partsminute*minuteInterval;
+      currentdate = new DateTime(currentdate.year, currentdate.month, currentdate.day, currentdate.hour,realminute-minuteInterval,1);
+    } else {
+      currentdate = new DateTime(currentdate.year, currentdate.month, currentdate.day, currentdate.hour,currentdate.minute-1,1);
+    }
     dateTimeString=currentdate.toString().substring(0,16);
     $[dateTimeId].focus();
   }
   void nextMinute(Event e, var detail, Node target){
     closing=false;
-    currentdate = new DateTime(currentdate.year, currentdate.month, currentdate.day, currentdate.hour,currentdate.minute+1,1);
+    if(minuteInterval != 0 && minuteInterval !=null){
+      // make sure that the next interval is on the hour minuteinterval, eg:
+      // 10 minute interval will lead to 0, 10, 20, 30, 40 etc.
+      // next one will be the one that is closest to the current value if it
+      // has not been on a 'good' value (eg 0,10,20,30,40,50). So 04 will become 10.
+      // this will do strange things when the divisor will not multiply to 60
+        num realminute = currentdate.minute;
+        num partsminute = (currentdate.minute/minuteInterval).floor();
+        // we do not need this
+        /*
+        num remainderminute = currentdate.minute%minuteInterval;
+        // print("rminute= ${remainderminute} parts = ${partsminute}");
+        if (remainderminute != 0){
+            partsminute = partsminute;
+        }
+         */
+        realminute = partsminute*minuteInterval;
+      currentdate = new DateTime(currentdate.year, currentdate.month, currentdate.day, currentdate.hour,realminute+minuteInterval,1);
+    } else {
+      currentdate = new DateTime(currentdate.year, currentdate.month, currentdate.day, currentdate.hour,currentdate.minute+1,1);
+
+    }
     dateTimeString=currentdate.toString().substring(0,16);
     $[dateTimeId].focus();
   }

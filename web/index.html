@@ -8,8 +8,6 @@
     <link rel="import" href="packages/polymer/polymer.html">
     <!-- import the date_time_input -->
     <link rel="import" href="../lib/date_time_input.html">
-    <script type="application/dart">export 'package:polymer/init.dart';</script>
-    <script src="packages/browser/dart.js"></script>
     
   </head>
   <body>
@@ -20,12 +18,19 @@
     </div>
     <div id="adt2">
     <label for="datetime2">DateTime2</label>
-      <input is="date-time-input" dateTimeId="dateTime2" dateTimeString="2013-01-01 10:00">
+      <input is="date-time-input" dateTimeId="dateTime2" dateTimeString="2013-01-01 10:04" minuteInterval=12>
     </div>
     <div id="adt3">
     <label for="datetime2">DateTime3</label>
-      <input is="date-time-input" dateTimeId="dateTime3" dateTimeString="">
+      <input is="date-time-input" dateTimeId="dateTime3" dateTimeString="" minuteInterval=15>
     </div>
-    
+    <div id="adt3">
+    <label for="datetime2">DateTime4</label>
+      <input is="date-time-input" dateTimeId="dateTime3" dateTimeString="" minuteInterval=17>
+    </div>
+
+
+    <script type="application/dart">export 'package:polymer/init.dart';</script>
+    <script src="packages/browser/dart.js"></script>
   </body>
 </html>
